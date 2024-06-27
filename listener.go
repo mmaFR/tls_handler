@@ -48,8 +48,10 @@ func NewListener(args arguments) (net.Listener, error) {
 		Logger.Printf("%s %s: error encountered while creating the listener: %s\n", structure, function, err.Error())
 		return nil, err
 	}
-	configTls.ClientAuth = tls.RequireAndVerifyClientCert
-	configTls.ClientCAs = caPool
+	if args.GetMTls() {
+		configTls.ClientAuth = tls.RequireAndVerifyClientCert
+		configTls.ClientCAs = caPool
+	}
 	configTls.Certificates = []tls.Certificate{*spoaCert}
 	configTls.MinVersion = tls.VersionTLS12
 	configTls.Rand = rand.Reader
