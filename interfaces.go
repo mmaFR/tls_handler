@@ -13,4 +13,6 @@ type arguments interface {
 	GetGenSpoeCert() bool
 	GetGenSpoaCert() bool
 	GetMTls() bool
+	GetTlsMaxVersion() uint16
+	GetTlsMinVersion() uint16
 }

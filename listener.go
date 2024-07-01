@@ -55,6 +55,8 @@ func NewListener(args arguments) (net.Listener, error) {
 	configTls.Certificates = []tls.Certificate{*spoaCert}
 	configTls.MinVersion = tls.VersionTLS12
 	configTls.Rand = rand.Reader
+	configTls.MaxVersion = args.GetTlsMaxVersion()
+	configTls.MinVersion = args.GetTlsMinVersion()
 
 	listener = tls.NewListener(listener, configTls)
 	return listener, nil
